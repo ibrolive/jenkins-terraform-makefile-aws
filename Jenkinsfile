@@ -1,4 +1,4 @@
-#!/usr/bin/env groovy
+#!/usr/bin/env groovy
 /*
 Jenkinsfile for deploying Terraform
 */
@@ -30,14 +30,14 @@ node {
     ])
     */
     
-    try {
-        withCredentials([ 
-            usernamePassword(credentialsId: "${params.aws_creds}", usernameVariable: 'username', passwordVariable: 'password'),
-        ])
+    try {
+        withCredentials([ 
+            usernamePassword(credentialsId: "${params.aws_creds}", usernameVariable: 'username', passwordVariable: 'password'),
+        ])
         {
-            withEnv(["AWS_ACCESS_KEY_ID=${username}","AWS_SECRET_ACCESS_KEY=${password}"])
+            withEnv(["AWS_ACCESS_KEY_ID=${username}","AWS_SECRET_ACCESS_KEY=${password}"])
             {
-                lock(resource: 'iac_sandbox_infrastructure_lock')
+                lock(resource: 'iac_sandbox_infrastructure_lock')
                 {
                     deleteDir()
 
@@ -74,8 +74,8 @@ node {
             }
         }
     }
-    catch (err)
+    catch (err)
     {
-        throw (err)
-    }
+        throw (err)
+    }
 }
