@@ -10,7 +10,7 @@ node {
             string(name: 'project', description: 'Project', defaultValue: 'sandbox', trim: false),
             string(name: 'git_creds', description: 'GithHub Credentials', defaultValue: 'sandbox', trim: false),
             string(name: 'aws_credentials', description: 'AWS Credentials', defaultValue: 'aws-terraform-iacl', trim: false),
-            choice(choices: ['Plan', 'Apply', 'Destroy'], name: 'plan_apply_or_destroy', description: 'Apply or Destroy Terraform', defaultValue: 'Plan')
+            choice(choices: ['Plan', 'Apply', 'Destroy'], name: 'plan_apply_or_destroy', description: 'Apply or Destroy Terraform')
         ])
     ])
 
