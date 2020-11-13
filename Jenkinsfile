@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 /*
 Jenkinsfile for deploying Terraform
 */
@@ -6,7 +7,7 @@ node {
     properties([
         parameters([
             string(name: 'bucket', description: 'Bucket Name for State File', trim: false),
-            string(name: 'project', description: 'Project', trim: false).
+            string(name: 'project', description: 'Project', trim: false),
             string(name: 'git_creds', description: 'GithHub Credentials', trim: false),
             string(name: 'aws_credentials', description: 'AWS Credentials', trim: false),
             choice(choices: ['Apply', 'Destroy'], name: 'apply_or_destroy', description: 'Apply or Destroy Terraform')
