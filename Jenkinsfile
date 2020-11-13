@@ -6,11 +6,11 @@ Jenkinsfile for deploying Terraform
 node {
     properties([
         parameters([
-            string(name: 'bucket', description: 'Bucket Name for State File', default: 'sandbox', trim: false),
-            string(name: 'project', description: 'Project', default: 'sandbox', trim: false),
-            string(name: 'git_creds', description: 'GithHub Credentials', default: 'sandbox', trim: false),
-            string(name: 'aws_credentials', description: 'AWS Credentials', default: 'aws-terraform-iacl', trim: false),
-            choice(choices: ['Plan', 'Apply', 'Destroy'], name: 'plan_apply_or_destroy', description: 'Apply or Destroy Terraform')
+            string(name: 'bucket', description: 'Bucket Name for State File', defaultValue: 'sandbox', trim: false),
+            string(name: 'project', description: 'Project', defaultValue: 'sandbox', trim: false),
+            string(name: 'git_creds', description: 'GithHub Credentials', defaultValue: 'sandbox', trim: false),
+            string(name: 'aws_credentials', description: 'AWS Credentials', defaultValue: 'aws-terraform-iacl', trim: false),
+            choice(choices: ['Plan', 'Apply', 'Destroy'], name: 'plan_apply_or_destroy', description: 'Apply or Destroy Terraform', defaultValue: 'Plan')
         ])
     ])
 
