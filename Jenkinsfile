@@ -2,17 +2,17 @@
 /*
 Jenkinsfile for deploying Terraform
 */
+properties([
+    parameters([
+        string(name: 'bucket', description: 'Bucket Name for State File', defaultValue: 'sandbox', trim: false),
+        string(name: 'project', description: 'Project', defaultValue: 'sandbox', trim: false),
+        string(name: 'git_creds', description: 'GithHub Credentials', defaultValue: 'sandbox', trim: false),
+        string(name: 'aws_credentials', description: 'AWS Credentials', defaultValue: 'aws-terraform-iacl', trim: false),
+        choice(choices: ['Plan', 'Apply', 'Destroy'], name: 'plan_apply_or_destroy', description: 'Apply or Destroy Terraform')
+    ])
+])
 
 node {
-    properties([
-        parameters([
-            string(name: 'bucket', description: 'Bucket Name for State File', defaultValue: 'sandbox', trim: false),
-            string(name: 'project', description: 'Project', defaultValue: 'sandbox', trim: false),
-            string(name: 'git_creds', description: 'GithHub Credentials', defaultValue: 'sandbox', trim: false),
-            string(name: 'aws_credentials', description: 'AWS Credentials', defaultValue: 'aws-terraform-iacl', trim: false),
-            choice(choices: ['Plan', 'Apply', 'Destroy'], name: 'plan_apply_or_destroy', description: 'Apply or Destroy Terraform')
-        ])
-    ])
 
     /*
     withCredentials([
@@ -32,7 +32,7 @@ node {
     
     try {
         withCredentials([ 
-            usernamePassword(credentialsId: "test", usernameVariable: 'username', passwordVariable: 'password'),
+            usernamePassword(credentialsId: "${params.aws_creds}", usernameVariable: 'username', passwordVariable: 'password'),
         ])
         {
             withEnv(["AWS_ACCESS_KEY_ID=${username}","AWS_SECRET_ACCESS_KEY=${password}"])
