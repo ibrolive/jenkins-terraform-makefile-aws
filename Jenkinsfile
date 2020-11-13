@@ -10,7 +10,7 @@ node {
             string(name: 'project', description: 'Project', default: 'sandbox', trim: false),
             string(name: 'git_creds', description: 'GithHub Credentials', default: 'sandbox', trim: false),
             string(name: 'aws_credentials', description: 'AWS Credentials', default: 'aws-terraform-iacl', trim: false),
-            choice(choices: ['Apply', 'Destroy'], name: 'apply_or_destroy', description: 'Apply or Destroy Terraform')
+            choice(choices: ['Plan', 'Apply', 'Destroy'], name: 'plan_apply_or_destroy', description: 'Apply or Destroy Terraform')
         ])
     ])
 
@@ -53,9 +53,9 @@ node {
 
                     stage('Terraform Plan') {
                         dir("base-vpc") {
-                            if (params.apply_or_destroy == 'Destroy') {
+                            if (params. plan_apply_or_destroy == 'Destroy') {
                                 sh "terraform plan -destroy -input=false -refresh=true -module-depth=-1 -var-file=environments/globals/inputs.tfvars -var-file=environments/${params.project}/inputs.tfvars"
-                            } else {
+                            } else { // if plan or apply is selected
                                 sh "terraform plan -input=false -refresh=true -module-depth=-1 -var-file=environments/globals/inputs.tfvars -var-file=environments/${params.project}/inputs.tfvars"
                             }
                         }
@@ -63,9 +63,9 @@ node {
 
                     stage('Terraform Apply/Destroy') {
                         dir("base-vpc") {
-                            if (params.apply_or_destroy == 'Destroy') {
+                            if (params. plan_apply_or_destroy == 'Destroy') {
                                 sh "terraform destroy -auto-approve -var-file=environments/globals/inputs.tfvars -var-file=environments/${params.project}/inputs.tfvars"
-                            } else {
+                            } else if (params. plan_apply_or_destroy == 'Apply') {
                                 sh "terraform apply -input=true -auto-approve -refresh=true -var-file=environments/globals/inputs.tfvars -var-file=environments/${params.project}/inputs.tfvars"
                             }
                         }
