@@ -32,7 +32,7 @@ node {
     
     try {
         withCredentials([ 
-            usernamePassword(credentialsId: "${params.aws_creds}", usernameVariable: 'username', passwordVariable: 'password'),
+            usernamePassword(credentialsId: "test", usernameVariable: 'username', passwordVariable: 'password'),
         ])
         {
             withEnv(["AWS_ACCESS_KEY_ID=${username}","AWS_SECRET_ACCESS_KEY=${password}"])
