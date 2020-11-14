@@ -4,7 +4,6 @@ Jenkinsfile for deploying Terraform
 */
 
 node {
-    agent jenkins-slave
     
     properties([
         parameters([
